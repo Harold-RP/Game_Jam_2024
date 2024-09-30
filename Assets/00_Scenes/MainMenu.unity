@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 301156612}
   - component: {fileID: 301156611}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: FadeTransition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
