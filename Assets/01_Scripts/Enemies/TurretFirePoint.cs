@@ -14,8 +14,12 @@ public class TurretFirePoint : MonoBehaviour
         GetComponentInParent<Turret>()?.onShoot.RemoveListener(Shoot);
     }
 
-    void Shoot(GameObject bulletPrefab)
+    void Shoot(GameObject bulletPrefab, TurretType type)
     {
+        if (type == TurretType.CrazyFire)
+        {
+            transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+        }
         Instantiate(bulletPrefab, transform.position, transform.rotation);
     }
 }

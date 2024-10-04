@@ -11,11 +11,25 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, lifeTime);
+        Collider c = GetComponent<Collider>();
+        c.enabled = false;
+        StartCoroutine(SetColliderOn(c));
+    }
+
+    IEnumerator SetColliderOn(Collider c)
+    {
+        yield return new WaitForSeconds(0.5f);
+        c.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }
