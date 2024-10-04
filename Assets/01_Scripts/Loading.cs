@@ -25,6 +25,7 @@ public class Loading : MonoBehaviour
                 // La escena está cargada, ahora inicia el fade out
                 animator.SetTrigger("FadeOut");
                 yield return new WaitForSeconds(1f);//espera 1 seg para el fadeOut
+                StartCoroutine(AudioManager.instance.IncreaseVocalsVolume(5f));
                 operation.allowSceneActivation = true;//Activa el cambio de escena
             }
             yield return null;
