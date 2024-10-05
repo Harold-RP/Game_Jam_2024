@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> BGM_Instrumental = new List<AudioClip>();
     public List<AudioClip> BGM_Vocals = new List<AudioClip>();
     public List<AudioClip> SFX = new List<AudioClip>();
+    float timer = 0f;
 
     public static AudioManager instance;
 
@@ -43,8 +45,14 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(InitialMusic());
+    }
+
+    IEnumerator InitialMusic()
+    {
+        yield return new WaitForSeconds(3f);
         PlayInstrumentalAndVocals("song_instrumental", "song_vocals");
-    } 
+    }
 
     public void PlaySFX(AudioClip sound)
     {
@@ -66,15 +74,13 @@ public class AudioManager : MonoBehaviour
 
     public IEnumerator IncreaseVocalsVolume(float duration)
     {
-        float time = 0;
-
-        while (time < duration)
+        while (timer < duration)
         {
-            time += Time.deltaTime;
-            vocalsAS.volume = Mathf.Lerp(vocalsAS.volume, instrumentalAS.volume, time / duration);
+            timer += Time.deltaTime;
+            vocalsAS.volume = Mathf.Lerp(vocalsAS.volume, instrumentalAS.volume, timer / duration);
             yield return null;
         }
-
+        timer = 0f;
         vocalsAS.volume = instrumentalAS.volume;
     }
 }
