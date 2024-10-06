@@ -16,7 +16,7 @@ public class UI_Animations : MonoBehaviour
 
     void Start()
     {
-        LeanTween.alpha(intro.GetComponent<RectTransform>(), 0, 0.5f).setDelay(3f).setOnComplete(InitMainMenu);
+        LeanTween.alpha(intro.GetComponent<RectTransform>(), 0, 1f).setDelay(3f).setOnComplete(InitMainMenu);
     }
 
     void InitMainMenu()

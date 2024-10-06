@@ -5,16 +5,19 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource instrumentalAS;
-    public AudioSource vocalsAS;
-    public AudioSource sfxAS;
+    [Header("--------------- Variables ---------------")]
     public float instrumentalVol = 0.5f;
     public float vocalsVol = 0f;
     public float sfxVol = 0.7f;
+    public float transitionDuration = 5f;
+    [Header("--------------- Audio Sources ---------------")]
+    public AudioSource instrumentalAS;
+    public AudioSource vocalsAS;
+    public AudioSource sfxAS;
+    [Header("--------------- Audio Clips ---------------")]
     public List<AudioClip> BGM_Instrumental = new List<AudioClip>();
     public List<AudioClip> BGM_Vocals = new List<AudioClip>();
     public List<AudioClip> SFX = new List<AudioClip>();
-    float timer = 0f;
 
     public static AudioManager instance;
 
@@ -72,18 +75,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public IEnumerator IncreaseVocalsVolume(float duration)
-    {
-        while (timer < duration)
-        {
-            timer += Time.deltaTime;
-            vocalsAS.volume = Mathf.Lerp(vocalsAS.volume, instrumentalAS.volume, timer / duration);
-            yield return null;
-        }
-        timer = 0f;
-        vocalsAS.volume = instrumentalAS.volume;
-    }
-
     public void PlayPauseBGM()
     {
         if (instrumentalAS.isPlaying)
@@ -96,5 +87,29 @@ public class AudioManager : MonoBehaviour
             instrumentalAS.Play();
             vocalsAS.Play();
         }
+    }
+
+    public void IncreaseVocalsVolume()
+    {
+        GameObject aS = vocalsAS.gameObject;
+        float initialValue = vocalsAS.volume;
+        float finalValue = instrumentalAS.volume * 0.6f;
+        float duration = transitionDuration;
+        LeanTween.value(aS, initialValue, finalValue, duration)
+                 .setOnUpdate((float value) => {
+                     AudioManager.instance.vocalsAS.volume = value;
+                 });
+    }
+
+    public void DecreaseVocalsVolume()
+    {
+        GameObject aS = vocalsAS.gameObject;
+        float initialValue = vocalsAS.volume;
+        float finalValue = 0f;
+        float duration = transitionDuration;
+        LeanTween.value(aS, initialValue, finalValue, duration)
+                 .setOnUpdate((float value) => {
+                     AudioManager.instance.vocalsAS.volume = value;
+                 });
     }
 }

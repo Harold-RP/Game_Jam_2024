@@ -22,10 +22,11 @@ public class Loading : MonoBehaviour
         {
             if (operation.progress >= 0.9f)
             {
+                //----------Para activar las voces del BGM---------
+                AudioManager.instance.IncreaseVocalsVolume();
                 // La escena está cargada, ahora inicia el fade out
                 animator.SetTrigger("FadeOut");
                 yield return new WaitForSeconds(1f);//espera 1 seg para el fadeOut
-                StartCoroutine(AudioManager.instance.IncreaseVocalsVolume(5f));
                 operation.allowSceneActivation = true;//Activa el cambio de escena
             }
             yield return null;
