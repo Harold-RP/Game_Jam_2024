@@ -24,6 +24,7 @@ public class UI_Animations : MonoBehaviour
         intro.GetComponentInChildren<Image>().raycastTarget = false;
         LeanTween.moveX(logo, 350, 3f).setEase(LeanTweenType.easeInOutQuad);
         LeanTween.moveX(logoShade, 380, 3f).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween.moveY(logoShade, 430, 3f).setEase(LeanTweenType.easeInOutQuad);
         LeanTween.alpha(logo, 1f, 2f);
         LeanTween.alpha(logoShade, 0.5f, 2f);
     }

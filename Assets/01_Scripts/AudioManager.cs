@@ -83,4 +83,18 @@ public class AudioManager : MonoBehaviour
         timer = 0f;
         vocalsAS.volume = instrumentalAS.volume;
     }
+
+    public void PlayPauseBGM()
+    {
+        if (instrumentalAS.isPlaying)
+        {
+            instrumentalAS.Pause();
+            vocalsAS.Pause();
+        }
+        else
+        {
+            instrumentalAS.Play();
+            vocalsAS.Play();
+        }
+    }
 }
