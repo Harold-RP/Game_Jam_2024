@@ -11,7 +11,7 @@ public class TrailerManager : MonoBehaviour
     VideoPlayer video;
     RawImage rawImg;
     float timer = 0f;
-    public float inactivityTimer = 60f;
+    public float inactivityTimer = 30f;
     bool isTransitioning = false;
 
     void Awake()
