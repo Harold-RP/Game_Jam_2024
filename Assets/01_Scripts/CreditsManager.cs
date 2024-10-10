@@ -16,7 +16,8 @@ public class CreditsManager : MonoBehaviour
     void Start()
     {
         AudioManager.instance.PlayInstrumentalAndVocals("Credits_Song [music]", "Credits_Song [vocals]");
-        AudioManager.instance.IncreaseVocalsVolume();
+        AudioManager.instance.InstrumentalVolumeUp(1f);
+        AudioManager.instance.VocalsVolumeUp(1f);
         LeanTween.value(gameObject, 0f, 255f, 1f)
                         .setOnUpdate((float value) => {
                             Color color = gameTitle.color;
@@ -37,7 +38,7 @@ public class CreditsManager : MonoBehaviour
 
     void ShowCredits()
     {
-        LeanTween.moveY(allCredits, 752, creditsDuration).setDelay(3f).setOnComplete(ShowReturnToMenu);
+        LeanTween.moveY(allCredits, 777, creditsDuration).setDelay(3f).setOnComplete(ShowReturnToMenu);
     }
 
     void ShowReturnToMenu()

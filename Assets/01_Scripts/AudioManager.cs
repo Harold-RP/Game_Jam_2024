@@ -9,7 +9,6 @@ public class AudioManager : MonoBehaviour
     public float instrumentalVol = 0.5f;
     public float vocalsVol = 0f;
     public float sfxVol = 0.7f;
-    public float transitionDuration = 5f;
     [Header("--------------- Audio Sources ---------------")]
     public AudioSource instrumentalAS;
     public AudioSource vocalsAS;
@@ -89,27 +88,47 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void IncreaseVocalsVolume()
+    public void VocalsVolumeUp(float duration)
     {
         GameObject aS = vocalsAS.gameObject;
         float initialValue = vocalsAS.volume;
         float finalValue = instrumentalAS.volume * 0.6f;
-        float duration = transitionDuration;
         LeanTween.value(aS, initialValue, finalValue, duration)
                  .setOnUpdate((float value) => {
-                     AudioManager.instance.vocalsAS.volume = value;
+                     vocalsAS.volume = value;
                  });
     }
 
-    public void DecreaseVocalsVolume()
+    public void VocalsVolumeDown(float duration)
     {
         GameObject aS = vocalsAS.gameObject;
         float initialValue = vocalsAS.volume;
         float finalValue = 0f;
-        float duration = transitionDuration;
         LeanTween.value(aS, initialValue, finalValue, duration)
                  .setOnUpdate((float value) => {
-                     AudioManager.instance.vocalsAS.volume = value;
+                     vocalsAS.volume = value;
+                 });
+    }
+
+    public void InstrumentalVolumeUp(float duration)
+    {
+        GameObject aS = instrumentalAS.gameObject;
+        float initialValue = 0f;
+        float finalValue = instrumentalVol;
+        LeanTween.value(aS, initialValue, finalValue, duration)
+                 .setOnUpdate((float value) => {
+                     instrumentalAS.volume = value;
+                 });
+    }
+
+    public void InstrumentalVolumeDown(float duration)
+    {
+        GameObject aS = instrumentalAS.gameObject;
+        float initialValue = instrumentalVol;
+        float finalValue = 0f;
+        LeanTween.value(aS, initialValue, finalValue, duration)
+                 .setOnUpdate((float value) => {
+                     instrumentalAS.volume = value;
                  });
     }
 }

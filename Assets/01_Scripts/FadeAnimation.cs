@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
+using UnityEngine.SceneManagement;
 
 public class FadeAnimation : MonoBehaviour
 {
@@ -16,6 +18,30 @@ public class FadeAnimation : MonoBehaviour
         animator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(1f);
         LevelLoader.LoadLevel(scene);
+    }
+
+
+
+    public void LoadSceneWithoutLoading(string name)
+    {
+        StartCoroutine(TransitionNoLoadingScreen(name));
+    }
+
+    IEnumerator TransitionNoLoadingScreen(string scene)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
+        operation.allowSceneActivation = false;
+        while (!operation.isDone)
+        {
+            if (operation.progress >= 0.9f)
+            {
+                // La escena está cargada, ahora inicia el fade out
+                animator.SetTrigger("FadeOut");
+                yield return new WaitForSeconds(1f);//espera 1 seg para el fadeOut
+                operation.allowSceneActivation = true;//Activa el cambio de escena
+            }
+            yield return null;
+        }
     }
 
     public void QuitGame()

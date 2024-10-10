@@ -495,7 +495,6 @@ MonoBehaviour:
   instrumentalVol: 0.5
   vocalsVol: 0
   sfxVol: 0.7
-  transitionDuration: 5
   instrumentalAS: {fileID: 1502288890}
   vocalsAS: {fileID: 703861063}
   sfxAS: {fileID: 134785123}
@@ -2760,7 +2759,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 301156614}
         m_TargetAssemblyTypeName: FadeAnimation, Assembly-CSharp
-        m_MethodName: LoadScene
+        m_MethodName: LoadSceneWithoutLoading
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
