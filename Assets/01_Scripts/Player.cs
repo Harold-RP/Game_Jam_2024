@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("--------------- Stats ---------------")]
+    public int score = 0;
     public float life = 100f;
     public float speed = 10f;
     public float runningSpeed = 20f;
